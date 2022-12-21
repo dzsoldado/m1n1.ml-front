@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
 
 import Navbar from '../components/Navbar';
-import {HOST} from '../config'
+import { HOST } from '../config'
 
 function isValidUrl(urlString) {
   try { 
@@ -13,6 +13,17 @@ function isValidUrl(urlString) {
   catch(e){ 
     return false; 
   }
+}
+
+async function postLinkToAPI(HOST, body){
+  const result = await fetch(`${HOST}/api/add/`, { 
+    method: 'POST', 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  const jsonResult = await result.json();
+  if (jsonResult.error) throw new Error(jsonResult.error);
+  return jsonResult;
 }
 
 export default function Landing() {
@@ -30,33 +41,23 @@ export default function Landing() {
     setValid(isValidRef.current)
 
     if (isValidRef.current){
-      setLoading(old=>true)
+      setLoading(true)
       
       try{
-        const auth = getAuth();
-        const id_token = await auth.currentUser?.getIdToken(/* forceRefresh */ true);
-        
-        let body = { 
+        const id_token = await getAuth().currentUser?.getIdToken(/* forceRefresh */ true) || null;
+
+        const body = { 
           link: URL ,
           id_token,
         }
 
-        let result = await fetch(`${HOST}/api/add/`, { 
-          method: 'POST', 
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(body)
-        });
-        let jsonResult = await result.json()
+        const { generated_url } = await postLinkToAPI(HOST, body);
         
-        if(jsonResult.error){
-          toast.error(jsonResult.error)
-        } 
-        setLoading(old=>false)
-        setGeneratedLink(old=>jsonResult.generated_url)
-
+        setLoading(false)
+        setGeneratedLink(old=>generated_url)
 
       }catch(err){
-        setLoading(old=>true)
+        setLoading(true)
         toast.error("A problem accured")
         console.log(err)
       }
