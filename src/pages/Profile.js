@@ -1,33 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signOut } from "firebase/auth";
+import { AuthContext } from '../Auth';
 
 export default function Profile() {
-  
-  const navigate = useNavigate();
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const Navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
-  function logOut(){
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      navigate('/')
-    }).catch((error) => {
-      // An error happened.
+  useEffect(() => {
+    authContext.currentUser??Navigate('/signin')
+  }, [])
+
+  function handleLogout(e){
+    authContext.signOut()
+    .then(() => { 
+      Navigate('/')
+    })
+    .catch((error) => {
+      console.log("%c"+JSON.stringify({code: error.code, message: error.message}), 'color: red;')
     });
   }
 
-  useEffect(() => {
-    user??navigate('/signin')
-  }, [])
-
-
   return (
     <div>
-      Home page for current user <button onClick={()=>logOut()}>Logout</button>
+      Home page for current user <button onClick={handleLogout}>Logout</button>
       
-      current user: {user?.email}
+      current user: {authContext.currentUser?.email}
     </div>
-    
   )
 }

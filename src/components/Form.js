@@ -1,10 +1,10 @@
+import { useState, useRef, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Container, Grid, Typography, Link } from '@mui/material';
 
-import { useState, useRef, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 
 export default function Form(props) {
 
@@ -12,7 +12,7 @@ export default function Form(props) {
   const [password, setPassword] = useState('');
 
   const emailField = useRef(null)
-
+  
   useEffect(()=>{
     emailField.current.focus()
   }, [])
@@ -20,13 +20,13 @@ export default function Form(props) {
   function generateLink(mode){
     if(mode==='signin'){
       return (
-        <Link to='/signup' variant="body2">
+        <Link to='/signup' component={RouterLink} variant="body2">
           Don't have an account? Sign Up
         </Link>
       )
     }else{
       return (
-        <Link to='/signin' variant="body2">
+        <Link to='/signin' component={RouterLink} variant="body2">
           Already have an account? Sign In
         </Link>
       )
@@ -86,10 +86,8 @@ export default function Form(props) {
           variant="outlined" 
           fullWidth
           required
-          minlength="4"
           inputProps={{ minLength: 4 }}
           onChange={(e)=>{setPassword(e.target.value)}}
-
         />
 
         <Button 

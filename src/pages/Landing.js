@@ -2,8 +2,6 @@ import { Button, TextField, Box, Container, Typography, CircularProgress, Card, 
 import React, { useState, useRef } from 'react'
 import { getAuth } from "firebase/auth";
 import toast, { Toaster } from 'react-hot-toast';
-
-import Navbar from '../components/Navbar';
 import { HOST } from '../config'
 
 function isValidUrl(urlString) {
@@ -66,8 +64,6 @@ export default function Landing() {
 
   return (
     <>
-      <Navbar />
-
       <Toaster/>
 
       <Container component="main" maxWidth="sm" >
