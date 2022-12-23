@@ -1,17 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import { MenuItem, Tooltip, Button, Avatar, Container, Menu, Typography, IconButton, Toolbar, Box, AppBar} from '@mui/material';
 
 import { AuthContext } from '../Auth';
 
@@ -66,7 +56,6 @@ function NavMenuMobile(){
         <MenuItem to={'/signup'} component={NavLink} onClick={handleCloseNavMenu}>
           <Typography textAlign="center">Sign up</Typography>
         </MenuItem>
-
       </Menu>
     </Box>
   )
@@ -76,29 +65,29 @@ function NavMenuDesktop(){
 
   return (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-        <Button
-          to={'/'} 
-          component={NavLink}
-          sx={{ my: 2, color: 'white', display: 'block' }}
-        >
-          Home
-        </Button>
+      <Button
+        to={'/'} 
+        component={NavLink}
+        sx={{ my: 2, color: 'white', display: 'block' }}
+      >
+        Home
+      </Button>
 
-        <Button                
-          to={'/signin'} 
-          component={NavLink}
-          sx={{ my: 2, color: 'white', display: 'block' }}
-        >
-          Sign in
-        </Button>
+      <Button                
+        to={'/signin'} 
+        component={NavLink}
+        sx={{ my: 2, color: 'white', display: 'block' }}
+      >
+        Sign in
+      </Button>
 
-        <Button
-          to={'/signup'} 
-          component={NavLink}
-          sx={{ my: 2, color: 'white', display: 'block' }}
-        >
-          Sign up
-        </Button>
+      <Button
+        to={'/signup'} 
+        component={NavLink}
+        sx={{ my: 2, color: 'white', display: 'block' }}
+      >
+        Sign up
+      </Button>
     </Box>
   )
 }
@@ -174,25 +163,28 @@ export default function Navbar() {
     <AppBar position="static">
       <Container maxWidth="md">
         <Toolbar disableGutters>
-
-          <Typography
-            variant="h6"
-            noWrap
-            to={'/'} 
-            component={NavLink}
+          <Box 
             sx={{
-              mr: 2,
               display: { xs: 'flex'},
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            m1n1.ml
-          </Typography>
+            }}>
+            <Typography
+              variant="h6"
+              noWrap
+              to={'/'} 
+              component={NavLink}
+              sx={{
+                mr: 2,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              m1n1.ml
+            </Typography>
+          </Box>
 
           {
             authContext.currentUser ?
