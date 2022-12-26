@@ -36,20 +36,25 @@ export default function SignUp() {
     setIsLoading(true);
     confirmPasswordValidity();
     const isValid = e.target.reportValidity();
-    const test = (passwordConfirm === password);
-    if (isValid && test){
-      signupHandler(email, password);
-      setPassword(old=>'')
+    if (isValid){
+      handleSignup(email, password);
+    }else{
+      setIsLoading(false);
     }
   }
-
-  function signupHandler(email, password){
+  
+  function handleSignup(email, password){
     authContext.signUp(email, password)
     .then(() => { 
       Navigate('/profile')
     })
     .catch((error) => {
+      console.log(password)
       setIsLoading(false);
+      setPassword(current=>'')
+      setPasswordConfirm('')
+      console.log(password)
+
       toast.error("Wrong credentials")
       console.log("%c"+JSON.stringify({code: error.code, message: error.message}), 'color: red;')
     });
@@ -100,6 +105,7 @@ export default function SignUp() {
             variant="outlined" 
             fullWidth
             required
+            value={password}
             inputProps={{ minLength: 4 }}
             onChange={(e)=>{setPassword(e.target.value)}}
           />
@@ -113,6 +119,7 @@ export default function SignUp() {
             variant="outlined" 
             fullWidth
             required
+            value={passwordConfirm}
             inputRef={passwordConfirmField}
             inputProps={{ minLength: 4 }}
             onChange={(e)=>{setPasswordConfirm(e.target.value);}}

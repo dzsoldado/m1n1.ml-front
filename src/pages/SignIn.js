@@ -27,20 +27,19 @@ export default function SignIn() {
     const isValid = e.target.reportValidity();
     if (isValid){
       setIsLoading(false);
-      signinHandler(email, password);
-      setPassword(old=>'')
+      handleSignin(email, password);
+      setPassword('')
     }
   }
 
-  function signinHandler(email, password){
-    authContext.signIn(email, password)
-    .then(() => {
+  async function handleSignin(email, password){
+    try{
+      await authContext.signIn(email, password)
       Navigate('/profile')
-    })
-    .catch((error) => {
+    }catch(error){
       toast.error("Wrong credentials")
       console.log("%c"+JSON.stringify({code: error.code, message: error.message}), 'color: red;')
-    });
+    }
   }
 
   return (
@@ -72,10 +71,9 @@ export default function SignIn() {
             variant="outlined" 
             fullWidth
             required
-            autoFocus
             autoComplete='email'
             value={email}
-            ref={emailField}
+            inputRef={emailField}
             onChange={(e)=>{setEmail(e.target.value)}}
           />
 
@@ -88,6 +86,7 @@ export default function SignIn() {
             variant="outlined" 
             fullWidth
             required
+            value={password}
             inputProps={{ minLength: 4 }}
             onChange={(e)=>{setPassword(e.target.value)}}
           />
