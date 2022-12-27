@@ -29,16 +29,14 @@ export default function Landing() {
   const [isLoading, setLoading] = useState(false);
   const [URL, setURL] = useState('')
   const [generatedLink, setGeneratedLink] = useState(null)
-  const [isValid, setValid] = useState(true)
-  const isValidRef = useRef(true);
+  const [isValid, setIsValid] = useState(true)
 
   async function handleSubmit(e){
     e.preventDefault()
 
-    isValidRef.current = isValidUrl(URL);
-    setValid(isValidRef.current)
+    setIsValid(_=>isValidUrl(URL))
 
-    if (isValidRef.current){
+    if (isValidUrl(URL)){
       setLoading(true)
       
       try{
@@ -92,7 +90,7 @@ export default function Landing() {
             fullWidth
             autoFocus
             value={URL}
-            onChange={(e)=>{setURL(e.target.value);isValidRef.current=true;setValid(isValidRef.current)}}
+            onChange={(e)=>{setURL(e.target.value);setIsValid(_=>true)}}
             error={!isValid}
             helperText={!isValid && "Invalid link."}
             />
