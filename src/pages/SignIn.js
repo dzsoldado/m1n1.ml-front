@@ -26,9 +26,9 @@ export default function SignIn() {
     setIsLoading(true);
     const isValid = e.target.reportValidity();
     if (isValid){
-      setIsLoading(false);
       handleSignin(email, password);
-      setPassword('')
+    }else{
+      setIsLoading(false);
     }
   }
 
@@ -37,6 +37,9 @@ export default function SignIn() {
       await authContext.signIn(email, password)
       Navigate('/profile')
     }catch(error){
+      setIsLoading(false);
+      setPassword('')
+
       toast.error("Wrong credentials")
       console.log("%c"+JSON.stringify({code: error.code, message: error.message}), 'color: red;')
     }

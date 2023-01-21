@@ -49,11 +49,9 @@ export default function SignUp() {
       Navigate('/profile')
     })
     .catch((error) => {
-      console.log(password)
       setIsLoading(false);
-      setPassword(current=>'')
+      setPassword('')
       setPasswordConfirm('')
-      console.log(password)
 
       toast.error("Wrong credentials")
       console.log("%c"+JSON.stringify({code: error.code, message: error.message}), 'color: red;')

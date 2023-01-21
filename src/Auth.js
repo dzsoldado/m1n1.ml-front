@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { signOut as firebaseSignOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from './firebase';
+import { getAuth, signOut as firebaseSignOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from './firebase';
+import {CircularProgress} from "@mui/material";
+const auth = getAuth(app)
 
 export const AuthContext = React.createContext(null);
 
 export default function AuthProvider({children}) {
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const context = {
     currentUser,
@@ -28,13 +31,16 @@ export default function AuthProvider({children}) {
   }
 
   useEffect(()=>{
-    const unsubscribe = auth.onAuthStateChanged(setCurrentUser);
+    const unsubscribe = auth.onAuthStateChanged((user)=>{
+      setCurrentUser(user);
+      setLoading(false);
+    });
     return unsubscribe;
   },[])
 
   return (
     <AuthContext.Provider value={context}>
-      {children}  
+      {loading? <CircularProgress sx={{ mt: 2, mb: 2 }} /> : children}  
     </AuthContext.Provider>
   )
 }
