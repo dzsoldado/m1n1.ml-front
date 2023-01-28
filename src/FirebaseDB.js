@@ -1,12 +1,12 @@
 import { getFirestore, collection, getDocs, where, query, onSnapshot } from 'firebase/firestore';
 import { app } from './firebase';
-import {HOST} from './config'
+import { HOST } from './config'
 import { getAuth } from 'firebase/auth'
 const auth = getAuth(app);
 
-const resultCleaner  = (doc)=>{
+const resultCleaner = (doc) => {
   const data = doc.data();
-  return{
+  return {
     id: doc.id,
     original_link: data.original_link,
     short_link: `${HOST}/${data.short_link}`,
