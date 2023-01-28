@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { MenuItem, Avatar, Menu, Typography, IconButton, Box } from '@mui/material';
-import hamburgerIcon from '../hamburger.svg';
+import hamburgerIcon from '../../hamburger.svg';
 
 export function NavMenuMobile() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

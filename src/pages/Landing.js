@@ -8,6 +8,7 @@ import {
   Card,
   CardContent,
   Link,
+  Backdrop,
 } from "@mui/material";
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
@@ -144,7 +145,12 @@ export default function Landing() {
           </Button>
         </Box>
 
-        {isLoading && <CircularProgress sx={{ mt: 2, mb: 2 }} />}
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={isLoading}
+        >
+          <CircularProgress />
+        </Backdrop>      
       </Container>
     </>
   );

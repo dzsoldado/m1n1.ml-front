@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, where, query, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, where, query, deleteDoc, doc } from 'firebase/firestore';
 import { app } from './firebase';
 import { HOST } from './config'
 import { getAuth } from 'firebase/auth'
@@ -11,6 +11,7 @@ const resultCleaner = (doc) => {
     original_link: data.original_link,
     short_link: `${HOST}/${data.short_link}`,
     created_at: data.created_at,
+    clicks_count: data.clicks_count ?? 0
   }
 }
 
@@ -23,5 +24,11 @@ export async function getLinks() {
   let urlsSnapshot = await getDocs(q);
 
   return urlsSnapshot.docs.map(resultCleaner);
+}
+
+export async function deleteLink(id){
+  const db = getFirestore(app)
+  const docRef = doc(db, 'url', id);
+  await deleteDoc(docRef);
 }
 

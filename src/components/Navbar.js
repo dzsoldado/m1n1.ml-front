@@ -5,9 +5,9 @@ import { Container, Typography, Toolbar, Box, AppBar } from '@mui/material';
 
 import { AuthContext } from '../Auth';
 
-import { NavMenuMobile } from './NavMenuMobile';
-import { NavMenuDesktop } from './NavMenuDesktop';
-import { NavMenuLoggedUser } from './NavMenuLoggedUser';
+import { NavMenuMobile } from './navbar/NavMenuMobile';
+import { NavMenuDesktop } from './navbar/NavMenuDesktop';
+import { NavMenuLoggedUser } from './navbar/NavMenuLoggedUser';
 
 export default function Navbar() {
   const authContext = useContext(AuthContext);
