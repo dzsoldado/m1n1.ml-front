@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { MenuItem, Tooltip, Avatar, Menu, Typography, IconButton, Box } from '@mui/material';
 import { AuthContext } from '../../Auth';
-import accountIcon from '../../account.svg';
+import accountIcon from '../../assets/account.svg';
 
 export function NavMenuLoggedUser() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);

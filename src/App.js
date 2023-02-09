@@ -1,4 +1,4 @@
-import './App.css';
+import './assets/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AuthProvider from './Auth';
 import Profile from './pages/Profile';
