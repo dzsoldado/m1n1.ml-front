@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
 
 import Navbar from './components/Navbar'
+import Details from './pages/Details';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           <Route path='/dashboard' element={
             <Dashboard/>
           }/>
+          <Route path='/details/:linkId' element={
+            <Details />
+          } />
           <Route path='*' element={
             <NotFound />
           }/>

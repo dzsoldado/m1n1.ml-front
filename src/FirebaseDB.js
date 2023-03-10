@@ -32,3 +32,16 @@ export async function deleteLink(id){
   await deleteDoc(docRef);
 }
 
+export async function getClicks(linkId){
+  const db = getFirestore(app)
+  const linksRef = collection(db, 'url');
+  const q = query(linksRef, where('short_link', '==', linkId));
+
+  let urlsSnapshot = await getDocs(q);
+
+  const clicksRef = collection(db, 'url', urlsSnapshot.docs[0].id, 'clicks');
+  const clicksSnapshot = await getDocs(query(clicksRef));
+  return clicksSnapshot.docs.map(doc=>doc.data())
+
+}
+
