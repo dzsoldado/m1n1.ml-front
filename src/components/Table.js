@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Table, TableBody, TableCell, Container, TableHead, TableRow, Link, Button, CircularProgress, Backdrop } from '@mui/material/';
-
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Table, TableBody, TableCell, Container, TableHead, TableRow, Link, Button, CircularProgress } from '@mui/material/';
 import { getLinks, deleteLink } from '../FirebaseDB';
+import deleteIcon from '../assets/delete.svg';
 
 
 export default function LinksTable() {
@@ -23,12 +24,12 @@ export default function LinksTable() {
     getLinks()
       .then(result => {
         setRows(_ => result);
-        setIsLoading(_ => false);
+        setIsLoading(false);
       })
   }
 
   function handleDelete(id) {
-    setIsLoading(_ => true);
+    setIsLoading(true);
 
     deleteLink(id)
       .then(() => {
@@ -67,13 +68,13 @@ export default function LinksTable() {
                     <TableCell style={{ minWidth: 100, maxWidth: 150 }}>{row.created_at}</TableCell>
                     <TableCell align="center" style={{ minWidth: 100, maxWidth: 150 }}>{row.clicks_count}</TableCell>
                     <TableCell align="center" style={{ minWidth: 80, maxWidth: 120 }}>
-                      <Button >
+                      <Link to={`/details/${row.short_link_id}`} component={RouterLink} variant="Button">
                         Details
-                      </Button>
+                      </Link>
                     </TableCell>
                     <TableCell align="center" style={{ minWidth: 80, maxWidth: 120 }}>
                       <Button onClick={() => handleDelete(row.id)}>
-                        Delete
+                        <img src={deleteIcon} alt="Delete" width='20' height='20' style={{ color: 'red'}}/>
                       </Button>
                     </TableCell>
                   </TableRow>

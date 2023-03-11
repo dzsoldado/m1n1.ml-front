@@ -43,7 +43,7 @@ export default function Landing() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setIsValid((_) => isValidUrl(URL));
+    setIsValid(isValidUrl(URL));
 
     if (isValidUrl(URL)) {
       setLoading(true);
@@ -102,7 +102,7 @@ export default function Landing() {
             value={URL}
             onChange={(e) => {
               setURL(e.target.value);
-              setIsValid((_) => true);
+              setIsValid(true);
             }}
             error={!isValid}
             helperText={!isValid && "Invalid link."}

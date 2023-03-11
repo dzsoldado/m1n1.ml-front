@@ -1,10 +1,33 @@
 
-
-export function generateColor(){
-    const hue = Math.floor(Math.random() * 361);
-    const saturation = Math.floor(Math.random() * 51) + 50;
-    const lightness = Math.floor(Math.random() * 31) + 40;
-    const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    return color;
-}
-
+export const colors = [
+    "#0072B2",
+    "#D55E00",
+    "#009E73",
+    "#E69F00",
+    "#F0E442",
+    "#56B4E9",
+    "#CC79A7",
+    "#FF7F00",
+    "#5B5B5B",
+    "#0072B2",
+    "#E51C23",
+    "#8BC34A",
+    "#4CAF50",
+    "#FF9800",
+    "#607D8B",
+    "#03A9F4",
+    "#FFC107",
+    "#9C27B0",
+    "#673AB7",
+    "#3F51B5",
+    "#00BCD4",
+    "#795548",
+    "#8E24AA",
+    "#2196F3",
+    "#9E9E9E",
+    "#03DAC6",
+    "#F44336",
+    "#9C27B0",
+    "#00ACC1",
+    "#FFEB3B"
+  ];
